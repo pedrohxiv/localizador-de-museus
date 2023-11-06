@@ -48,6 +48,12 @@ public class MuseumService implements MuseumServiceInterface {
 
   @Override
   public Museum getMuseum(Long id) {
-    throw new UnsupportedOperationException("Unimplemented method 'getMuseum'");
+    Optional<Museum> museum = this.database.getMuseum(id);
+
+    if (museum.isEmpty()) {
+      throw new MuseumNotFoundException();
+    }
+
+    return museum.get();
   }
 }
